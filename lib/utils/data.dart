@@ -6,7 +6,7 @@ var profile = {
 
 List categories = [
   {"name": "All", "icon": "assets/icons/category/all.svg"},
-  {"name": "Coding", "icon": "assets/category/coding.svg"},
+  {"name": "Coding", "icon": "assets/icons/category/coding.svg"},
   {"name": "Education", "icon": "assets/icons/category/education.svg"},
   {"name": "Design", "icon": "assets/icons/category/design.svg"},
   {"name": "Business", "icon": "assets/icons/category/business.svg"},
@@ -204,7 +204,65 @@ List features = [
   },
 ];
 
+List mycourses = [
+  {
+    "id": 105,
+    "Topic": {
+      'name': 'Introduction',
+      'subtopic': {
+        'name': 'what is flutter',
+        'notes':
+            'Functions are a set of statements that perform a specific task. '
+      }
+    },
+    "name": "Painting",
+    "image":
+        "https://images.unsplash.com/photo-1596548438137-d51ea5c83ca5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fGZhc2hpb258ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "price": "\$65.00",
+    "duration": "12 hours",
+    "session": "8 lessons",
+    "review": "4.5",
+    "is_favorited": false,
+    "description":
+        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.",
+  },
+  {
+    "id": 105,
+    "Topic": {
+      'name': 'Introduction',
+      'subtopic': {
+        'name': 'what is flutter',
+        'notes':
+            'Functions are a set of statements that perform a specific task. '
+      }
+    },
+    "name": "Painting",
+    "image":
+        "https://images.unsplash.com/photo-1596548438137-d51ea5c83ca5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fGZhc2hpb258ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "price": "\$65.00",
+    "duration": "12 hours",
+    "session": "8 lessons",
+    "review": "4.5",
+    "is_favorited": false,
+    "description":
+        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.",
+  },
+];
 List recommends = [
+  {
+    "id": 105,
+    "Topic": {'Introduction'},
+    "name": "Painting",
+    "image":
+        "https://images.unsplash.com/photo-1596548438137-d51ea5c83ca5?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fGZhc2hpb258ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
+    "price": "\$65.00",
+    "duration": "12 hours",
+    "session": "8 lessons",
+    "review": "4.5",
+    "is_favorited": false,
+    "description":
+        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available.",
+  },
   {
     "id": 105,
     "name": "Painting",

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:online_course/screens/account.dart';
 import 'package:online_course/screens/chat.dart';
+import 'package:online_course/screens/courseView.dart';
+import 'package:online_course/screens/test.dart';
 import 'package:online_course/theme/color.dart';
 import 'package:online_course/utils/constant.dart';
 import 'package:online_course/widgets/bottombar_item.dart';
@@ -29,7 +31,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
     {
       "icon": "assets/icons/play.svg",
       "active_icon": "assets/icons/play.svg",
-      "page": Container(),
+      "page": CoursesPage(),
     },
     {
       "icon": "assets/icons/chat.svg",
