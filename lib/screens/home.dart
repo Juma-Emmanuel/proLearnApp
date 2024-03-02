@@ -1,5 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:online_course/Controllers/GetCategories.dart';
+import 'package:online_course/Controllers/GetFeaturedCourses.dart';
+import 'package:online_course/Controllers/GetUser.dart';
+import 'package:online_course/Models/Category.dart';
+import 'package:online_course/Models/Course.dart';
+import 'package:online_course/Models/User.dart';
 import 'package:online_course/theme/color.dart';
 import 'package:online_course/utils/data.dart';
 import 'package:online_course/widgets/category_box.dart';
@@ -15,6 +21,45 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  GetUser getUser = GetUser();
+  User? user;
+  GetCategories getCategories = GetCategories();
+  List<Category> categories = [];
+
+  GetRecommendedCourses getFeaturedCourses = GetRecommendedCourses();
+  List<Course> featuredCourses = [];
+
+  GetRecommendedCourses getRecommendedCourses = GetRecommendedCourses();
+  List<Course> recommendedCourses = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      User fetchedUser = await getUser.fetchUser();
+      List<Category> fetchedCategories = await getCategories.fetchCategories();
+
+      List<Course> fetchedRecommendedCourses =
+          await getRecommendedCourses.fetchCourses();
+
+      List<Course> fetchedFeaturedCourses =
+          await getFeaturedCourses.fetchCourses();
+
+      setState(() {
+        user = fetchedUser;
+        categories = fetchedCategories;
+        featuredCourses = fetchedFeaturedCourses;
+        recommendedCourses = fetchedRecommendedCourses;
+      });
+    } catch (e) {
+      throw Exception('Error fetching data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,23 +93,32 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                profile["name"]!,
-                style: TextStyle(
-                  color: AppColor.labelColor,
-                  fontSize: 14,
-                ),
-              ),
+              user != null
+                  ? Row(
+                      children: [
+                        Text(
+                          "Hello,",
+                          style: TextStyle(
+                            color: AppColor.textColor,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          user!.first_name,
+                          style: TextStyle(
+                            color: Color(0XFF3B61C0),
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    )
+                  : const CircularProgressIndicator(),
               const SizedBox(
                 height: 5,
-              ),
-              Text(
-                "Good Morning!",
-                style: TextStyle(
-                  color: AppColor.textColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                ),
               ),
             ],
           ),
@@ -138,7 +192,7 @@ class _HomePageState extends State<HomePage> {
             child: CategoryBox(
               selectedColor: Colors.white,
               data: categories[index],
-              onTap: null,
+              onTap: () {},
             ),
           ),
         ),
@@ -155,9 +209,9 @@ class _HomePageState extends State<HomePage> {
         viewportFraction: .75,
       ),
       items: List.generate(
-        features.length,
+        featuredCourses.length,
         (index) => FeatureItem(
-          data: features[index],
+          data: featuredCourses[index],
         ),
       ),
     );
@@ -169,11 +223,11 @@ class _HomePageState extends State<HomePage> {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: List.generate(
-          recommends.length,
+          recommendedCourses.length,
           (index) => Padding(
             padding: const EdgeInsets.only(right: 10),
             child: RecommendItem(
-              data: recommends[index],
+              data: recommendedCourses[index],
             ),
           ),
         ),

@@ -35,7 +35,7 @@ class RecommendItem extends StatelessWidget {
         child: Row(
           children: [
             CustomImage(
-              data["image"],
+              data.image,
               radius: 15,
               height: 80,
             ),
@@ -54,7 +54,7 @@ class RecommendItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          data["name"],
+          data.name,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -67,7 +67,7 @@ class RecommendItem extends StatelessWidget {
           height: 5,
         ),
         Text(
-          data["price"],
+          data.price,
           style: TextStyle(fontSize: 14, color: AppColor.textColor),
         ),
         const SizedBox(
@@ -90,7 +90,7 @@ class RecommendItem extends StatelessWidget {
           width: 2,
         ),
         Text(
-          data["duration"],
+          data.duration,
           style: TextStyle(
             fontSize: 12,
             color: AppColor.labelColor,
@@ -108,7 +108,7 @@ class RecommendItem extends StatelessWidget {
           width: 2,
         ),
         Text(
-          data["review"],
+          data.review,
           style: TextStyle(
             fontSize: 12,
             color: AppColor.labelColor,

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:online_course/theme/color.dart';
 import 'package:online_course/widgets/custom_image.dart';
 
-class EnrolledCourse extends StatelessWidget {
-  const EnrolledCourse({
+class CourseItem extends StatelessWidget {
+  const CourseItem({
     Key? key,
     required this.data,
     this.onTap,
   }) : super(key: key);
 
   final data;
+
   final GestureTapCallback? onTap;
 
   @override
@@ -69,9 +70,8 @@ class EnrolledCourse extends StatelessWidget {
           height: 5,
         ),
         Text(
-          'Inprogress',
-          style:
-              TextStyle(fontSize: 14, color: Color.fromARGB(255, 53, 211, 32)),
+          data.duration,
+          style: TextStyle(fontSize: 14, color: AppColor.textColor),
         ),
         const SizedBox(
           height: 15,
@@ -112,7 +112,6 @@ class EnrolledCourse extends StatelessWidget {
           width: 2,
         ),
         Text(
-          // data["review"],
           data.review,
           style: TextStyle(
             fontSize: 12,

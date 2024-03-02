@@ -39,7 +39,7 @@ class CategoryBox extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: SvgPicture.asset(
-              data["icon"],
+              data.icon,
               color: isSelected ? selectedColor : AppColor.textColor,
               width: 30,
               height: 30,
@@ -49,7 +49,7 @@ class CategoryBox extends StatelessWidget {
             height: 10,
           ),
           Text(
-            data["name"],
+            data.name,
             maxLines: 1,
             overflow: TextOverflow.fade,
             style: TextStyle(

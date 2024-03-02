@@ -41,7 +41,7 @@ class FeatureItem extends StatelessWidget {
         child: Stack(
           children: [
             CustomImage(
-              data["image"],
+              data.image,
               width: double.infinity,
               height: 190,
               radius: 15,
@@ -69,7 +69,7 @@ class FeatureItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            data["name"],
+            data.name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -103,7 +103,7 @@ class FeatureItem extends StatelessWidget {
         ],
       ),
       child: Text(
-        data["price"],
+        data.price,
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.w500,
@@ -119,7 +119,7 @@ class FeatureItem extends StatelessWidget {
         _getAttribute(
           Icons.play_circle_outlined,
           AppColor.labelColor,
-          data["session"],
+          data.session,
         ),
         const SizedBox(
           width: 12,
@@ -127,7 +127,7 @@ class FeatureItem extends StatelessWidget {
         _getAttribute(
           Icons.schedule_rounded,
           AppColor.labelColor,
-          data["duration"],
+          data.duration,
         ),
         const SizedBox(
           width: 12,
@@ -135,7 +135,7 @@ class FeatureItem extends StatelessWidget {
         _getAttribute(
           Icons.star,
           AppColor.yellow,
-          data["review"],
+          data.review,
         ),
       ],
     );

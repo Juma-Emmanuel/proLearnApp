@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:online_course/Controllers/GetUser.dart';
+import 'package:online_course/Models/User.dart';
 import 'package:online_course/theme/color.dart';
 import 'package:online_course/utils/data.dart';
 import 'package:online_course/widgets/custom_image.dart';
@@ -13,6 +15,27 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  GetUser getUser = GetUser();
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      User fetchedUser = await getUser.fetchUser();
+
+      setState(() {
+        user = fetchedUser;
+      });
+    } catch (e) {
+      throw Exception('Error fetching data: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -84,13 +107,15 @@ class _AccountPageState extends State<AccountPage> {
         const SizedBox(
           height: 10,
         ),
-        Text(
-          profile["name"]!,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        user != null
+            ? Text(
+                user!.first_name,
+                style: TextStyle(
+                  color: Color(0XFF3B61C0),
+                  fontSize: 18,
+                ),
+              )
+            : const CircularProgressIndicator(),
       ],
     );
   }
@@ -236,6 +261,7 @@ class _AccountPageState extends State<AccountPage> {
         title: "Log Out",
         leadingIcon: "assets/icons/logout.svg",
         bgIconColor: AppColor.darker,
+        onTap: () {},
       ),
     );
   }

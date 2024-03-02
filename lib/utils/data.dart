@@ -624,7 +624,7 @@ List chats = [
   {
     "image":
         "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
-    "fname": "John",
+    "fname": "Joh\]POITYASn",
     "lname": "",
     "name": "Corey Aminoff",
     "skill": "Neurologists",
