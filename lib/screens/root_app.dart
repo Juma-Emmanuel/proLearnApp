@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_course/screens/account.dart';
-import 'package:online_course/screens/chat.dart';
+import 'package:online_course/screens/reports.dart';
 import 'package:online_course/screens/learnView.dart';
 import 'package:online_course/theme/color.dart';
 import 'package:online_course/utils/constant.dart';
@@ -25,12 +25,12 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
     {
       "icon": "assets/icons/play.svg",
       "active_icon": "assets/icons/play.svg",
-      "page": CoursesPage(),
+      "page": LearnView(),
     },
     {
       "icon": "assets/icons/chat.svg",
       "active_icon": "assets/icons/chat.svg",
-      "page": ChatPage(),
+      "page": ReportPage(),
     },
     {
       "icon": "assets/icons/profile.svg",
@@ -39,7 +39,6 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
     },
   ];
 
-//====== set animation=====
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: ANIMATED_BODY_MS),
     vsync: this,

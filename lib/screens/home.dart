@@ -1,13 +1,18 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:online_course/Controllers/GetCategories.dart';
 import 'package:online_course/Controllers/GetFeaturedCourses.dart';
+import 'package:online_course/Controllers/GetRecommendedCourses.dart';
 import 'package:online_course/Controllers/GetUser.dart';
 import 'package:online_course/Models/Category.dart';
 import 'package:online_course/Models/Course.dart';
 import 'package:online_course/Models/User.dart';
+import 'package:online_course/screens/CategoryCourseview.dart';
+import 'package:online_course/screens/CourseDetailview.dart';
+import 'package:online_course/screens/CoursesView.dart';
 import 'package:online_course/theme/color.dart';
-import 'package:online_course/utils/data.dart';
+
 import 'package:online_course/widgets/category_box.dart';
 import 'package:online_course/widgets/feature_item.dart';
 import 'package:online_course/widgets/notification_box.dart';
@@ -26,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   GetCategories getCategories = GetCategories();
   List<Category> categories = [];
 
-  GetRecommendedCourses getFeaturedCourses = GetRecommendedCourses();
+  GetFeaturedCourses getFeaturedCourses = GetFeaturedCourses();
   List<Course> featuredCourses = [];
 
   GetRecommendedCourses getRecommendedCourses = GetRecommendedCourses();
@@ -56,7 +61,11 @@ class _HomePageState extends State<HomePage> {
         recommendedCourses = fetchedRecommendedCourses;
       });
     } catch (e) {
-      throw Exception('Error fetching data: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error fetching data. Please try again.'),
+        ),
+      );
     }
   }
 
@@ -64,22 +73,25 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.appBgColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: AppColor.appBarColor,
-            pinned: true,
-            snap: true,
-            floating: true,
-            title: _buildAppBar(),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => _buildBody(),
-              childCount: 1,
+      body: RefreshIndicator(
+        onRefresh: () => fetchData(),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: AppColor.appBarColor,
+              pinned: true,
+              snap: true,
+              floating: true,
+              title: _buildAppBar(),
             ),
-          )
-        ],
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => _buildBody(),
+                childCount: 1,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -180,22 +192,96 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Map<String, dynamic> all = {
+    "name": "All",
+    "icon": "assets/icons/category/all.svg",
+  };
   _buildCategories() {
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: List.generate(
-          categories.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: CategoryBox(
-              selectedColor: Colors.white,
-              data: categories[index],
-              onTap: () {},
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 19.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        //  CoursePage(course: courses[index])
+                        CoursesView(
+                      title: 'All Courses',
+                    ),
+                  ),
+                );
+              },
+              child: Column(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.fastOutSlowIn,
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColor.shadowColor.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: Offset(1, 1), // changes position of shadow
+                        ),
+                      ],
+                      shape: BoxShape.circle,
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/icons/category/all.svg',
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'All',
+                    maxLines: 1,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(
+                      color: AppColor.textColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
+          Row(
+            children: List.generate(
+              categories.length,
+              (index) => Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: CategoryBox(
+                  selectedColor: Colors.white,
+                  data: categories[index],
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            //  CoursePage(course: courses[index])
+                            CategoryCourseView(
+                          title: categories[index].name,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -212,6 +298,23 @@ class _HomePageState extends State<HomePage> {
         featuredCourses.length,
         (index) => FeatureItem(
           data: featuredCourses[index],
+          onTap: (() {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CourseDetailView(
+                  courseId: featuredCourses[index].courseId,
+                  name: featuredCourses[index].name,
+                  image: featuredCourses[index].image,
+                  description: featuredCourses[index].description,
+                  price: featuredCourses[index].price,
+                  duration: featuredCourses[index].duration,
+                  session: featuredCourses[index].session,
+                  review: featuredCourses[index].review,
+                ),
+              ),
+            );
+          }),
         ),
       ),
     );
@@ -228,6 +331,23 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(right: 10),
             child: RecommendItem(
               data: recommendedCourses[index],
+              onTap: (() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CourseDetailView(
+                      courseId: recommendedCourses[index].courseId,
+                      name: recommendedCourses[index].name,
+                      image: recommendedCourses[index].image,
+                      description: recommendedCourses[index].description,
+                      price: recommendedCourses[index].price,
+                      duration: recommendedCourses[index].duration,
+                      session: recommendedCourses[index].session,
+                      review: recommendedCourses[index].review,
+                    ),
+                  ),
+                );
+              }),
             ),
           ),
         ),

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:online_course/Controllers/mainAPI.dart';
 import 'package:online_course/Models/RegistrationModel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegistrationRequest {
   Future<bool> registrationRequest(
@@ -34,9 +33,4 @@ class RegistrationRequest {
       return false;
     }
   }
-
-  // Future<void> saveAuthToken(String token) async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('authToken', token);
-  // }
 }

@@ -2,20 +2,23 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:online_course/Controllers/Authorize.dart';
 import 'package:online_course/Controllers/mainAPI.dart';
+import 'package:online_course/Models/report.dart';
 
-import 'package:online_course/Models/User.dart';
-
-class GetUser {
+class GetReport {
   final AuthorizeRequest _authorizeRequest = AuthorizeRequest();
 
-  Future<User> fetchUser() async {
+  late Report report;
+  late Future<Report> userFuture;
+
+  Future<Report> fetchReport() async {
     String? token = await _authorizeRequest.authorizeRequest();
-    print(token);
     if (token == null) {
       throw Exception('Token is null');
     }
+
     String mainUrl = MainApi.url;
-    String fetchUrl = "$mainUrl/current-user/";
+    String fetchUrl = "$mainUrl/report/";
+
     try {
       final response = await http.get(
         Uri.parse(fetchUrl),
@@ -24,12 +27,11 @@ class GetUser {
           'Authorization': 'Bearer $token',
         },
       );
+
       if (response.statusCode == 200) {
-        Map<String, dynamic> userData = json.decode(response.body);
+        Map<String, dynamic> responseData = json.decode(response.body);
 
-        print(User.fromJson(userData));
-
-        return User.fromJson(userData);
+        return Report.fromJson(responseData);
       } else {
         throw Exception('Request failed with status: ${response.statusCode}');
       }

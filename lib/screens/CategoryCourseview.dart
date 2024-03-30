@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:online_course/Controllers/GetCategoryCourse.dart';
 import 'package:online_course/Models/Course.dart';
 import 'package:online_course/screens/CourseDetailview.dart';
 import 'package:online_course/widgets/CourseItem.dart';
 
-import '../Controllers/GetCourseProducts.dart';
-
-class CoursesView extends StatefulWidget {
+class CategoryCourseView extends StatefulWidget {
   final String title;
 
-  const CoursesView({super.key, required this.title});
+  const CategoryCourseView({super.key, required this.title});
   @override
-  State<CoursesView> createState() => _CoursesPageState();
+  State<CategoryCourseView> createState() => _CoursesPageState();
 }
 
-class _CoursesPageState extends State<CoursesView> {
-  GetCourseProducts getCourses = GetCourseProducts();
+class _CoursesPageState extends State<CategoryCourseView> {
+  GetCategoryCourses getCourses = GetCategoryCourses();
   List<Course> courses = [];
 
   @override
@@ -25,7 +24,7 @@ class _CoursesPageState extends State<CoursesView> {
 
   Future<void> fetchData() async {
     try {
-      List<Course> fetchedCourses = await getCourses.fetchCourses();
+      List<Course> fetchedCourses = await getCourses.fetchCourses(widget.title);
 
       setState(() {
         courses = fetchedCourses;

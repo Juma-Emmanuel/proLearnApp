@@ -4,10 +4,10 @@ import 'package:online_course/Controllers/mainAPI.dart';
 import 'package:online_course/Models/Course.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
-class GetFeaturedCourses {
-  Future<List<Course>> fetchCourses() async {
+class GetCategoryCourses {
+  Future<List<Course>> fetchCourses(String categoryName) async {
     String mainUrl = MainApi.url;
-    String fetchUrl = "$mainUrl/featuredcourses/";
+    String fetchUrl = "$mainUrl/courseproducts/$categoryName/";
     try {
       final response = await http.get(
         Uri.parse(fetchUrl),

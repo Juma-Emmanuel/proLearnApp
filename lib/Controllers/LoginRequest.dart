@@ -27,7 +27,7 @@ class LoginRequest {
     final Map<String, dynamic> responseData = json.decode(response.body);
     if (response.statusCode == 200) {
       if (responseData.containsKey('access')) {
-        await saveAuthToken(responseData['access']);
+        await saveAuthToken(responseData['access'], responseData['refresh']);
       }
       if (onAuthentication != null) {
         onAuthentication!(true);
@@ -39,10 +39,12 @@ class LoginRequest {
     }
   }
 
-  Future<void> saveAuthToken(String token) async {
+  Future<void> saveAuthToken(String token, String refresh) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('jwtToken', token);
+    await prefs.setString('refreshToken', refresh);
     print('hello');
     print(token);
+    print('my refresh' + refresh);
   }
 }

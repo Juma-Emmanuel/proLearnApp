@@ -563,10 +563,10 @@ List lessons = [
 List chats = [
   {
     "image":
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjV8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    "fname": "John",
-    "lname": "Siphron",
-    "name": "John Siphron",
+        "https://images.unsplash.com/photo-1530785602389-07594beb8b73?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "fname": "Charlene",
+    "lname": "Mbithi",
+    "name": "Charlene Mbithi",
     "skill": "Dermatologists",
     "last_text":
         "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document",
@@ -575,10 +575,10 @@ List chats = [
   },
   {
     "image":
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    "fname": "Corey",
-    "lname": "Aminoff",
-    "name": "Corey Aminoff",
+        "https://images.unsplash.com/photo-1562173650-f61426fbe683?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "fname": "Barasa",
+    "lname": "Alfred",
+    "name": "Alfred Barasa",
     "skill": "Neurologists",
     "last_text":
         "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document",
@@ -587,10 +587,10 @@ List chats = [
   },
   {
     "image":
-        "https://images.unsplash.com/photo-1617069470302-9b5592c80f66?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Z2lybHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    "fname": "Siriya",
-    "lname": "Aminoff",
-    "name": "Siriya Aminoff",
+        "https://images.unsplash.com/photo-1589199051919-52f5af09d5a0?q=80&w=1586&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "fname": "Anastacia",
+    "lname": "Mukami",
+    "name": "Anastacia Mukami",
     "skill": "Neurologists",
     "last_text":
         "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document",
@@ -599,10 +599,10 @@ List chats = [
   },
   {
     "image":
-        "https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    "fname": "Rubin",
-    "lname": "Joe",
-    "name": "Rubin Joe",
+        "https://plus.unsplash.com/premium_photo-1682125393584-3fa283698143?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "fname": "Robin ",
+    "lname": "Kamau",
+    "name": "Robin Kamau",
     "skill": "Neurologists",
     "last_text":
         "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document",
@@ -611,10 +611,10 @@ List chats = [
   },
   {
     "image":
-        "https://images.unsplash.com/photo-1564460576398-ef55d99548b2?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-    "fname": "John",
-    "lname": "",
-    "name": "DentTerry Jew",
+        "https://images.unsplash.com/photo-1523297736436-356615162cc8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "fname": "Sylvia",
+    "lname": "Jelimo",
+    "name": "Sylvia Jelimo",
     "skill": "Dentist",
     "last_text":
         "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document",
@@ -623,10 +623,10 @@ List chats = [
   },
   {
     "image":
-        "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
-    "fname": "Joh\]POITYASn",
-    "lname": "",
-    "name": "Corey Aminoff",
+        "https://images.unsplash.com/photo-1695999329190-af8e11b3a216?q=80&w=1449&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "fname": "Rashid",
+    "lname": "Abdalla",
+    "name": "Rashid Abdalla",
     "skill": "Neurologists",
     "last_text":
         "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document",

@@ -111,26 +111,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               width: 350,
               height: 48,
               child: TextField(
+                obscureText: true,
                 controller: passwordController,
                 onChanged: (val) {},
                 decoration: InputDecoration(
                   hintText: 'Password',
-                  focusedBorder: textfieldBorder,
-                  enabledBorder: textfieldBorder,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: SizedBox(
-              width: 350,
-              height: 48,
-              child: TextField(
-                obscureText: true,
-                controller: confirmPasswordController,
-                decoration: InputDecoration(
-                  hintText: 'Confirm Password',
                   focusedBorder: textfieldBorder,
                   enabledBorder: textfieldBorder,
                 ),

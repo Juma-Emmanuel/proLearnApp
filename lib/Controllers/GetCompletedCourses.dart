@@ -3,16 +3,28 @@ import 'package:http/http.dart' as http;
 import 'package:online_course/Controllers/mainAPI.dart';
 import 'package:online_course/Models/Course.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class GetFeaturedCourses {
+class GetCompletedCourses {
+  Future<String?> getAuthToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('jwtToken');
+  }
+
   Future<List<Course>> fetchCourses() async {
+    String? token = await getAuthToken();
+    if (token == null) {
+      throw Exception('Token is null');
+    }
     String mainUrl = MainApi.url;
-    String fetchUrl = "$mainUrl/featuredcourses/";
+
+    String fetchUrl = "$mainUrl/completedcourses/";
     try {
       final response = await http.get(
         Uri.parse(fetchUrl),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
         },
       );
       if (response.statusCode == 200) {

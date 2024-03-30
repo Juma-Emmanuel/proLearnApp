@@ -80,6 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 42,
               child: ElevatedButton(
                 onPressed: () {
+                  // Navigator.pushNamedAndRemoveUntil(
+                  //     context, '/rootapp', ((route) => false));
                   request.loginRequest(
                     emailController.text,
                     passwordController.text,

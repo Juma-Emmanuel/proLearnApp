@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:online_course/Controllers/GetCourses.dart';
+
+import 'package:online_course/Controllers/GetCollectionCourses.dart';
+import 'package:online_course/Controllers/GetCompletedCourses.dart';
+
 import 'package:online_course/Models/Course.dart';
 import 'package:online_course/screens/notesView.dart';
+import 'package:online_course/widgets/completed_course.dart';
 import 'package:online_course/widgets/enrolledCourse.dart';
 
-class CoursesPage extends StatefulWidget {
+class LearnView extends StatefulWidget {
   @override
-  State<CoursesPage> createState() => _CoursesPageState();
+  State<LearnView> createState() => _LearnViewState();
 }
 
-class _CoursesPageState extends State<CoursesPage> {
-  GetCourses getCourses = GetCourses();
-  List<Course> courses = [];
+class _LearnViewState extends State<LearnView> {
+  GetCollectionCourses getCourses = GetCollectionCourses();
+  GetCompletedCourses getCompletedCourses = GetCompletedCourses();
+
+  List<Course> collectioncourses = [];
+  List<Course> completedcourses = [];
+  bool isFirstWidgetVisible = true;
+  bool isSecondWidgetVisible = false;
+
+  void toggleWidgets() {
+    setState(() {
+      isFirstWidgetVisible = !isFirstWidgetVisible;
+    });
+  }
 
   @override
   void initState() {
@@ -22,140 +37,148 @@ class _CoursesPageState extends State<CoursesPage> {
   Future<void> fetchData() async {
     try {
       List<Course> fetchedCourses = await getCourses.fetchCourses();
+      List<Course> fetchedCompletedCourses =
+          await getCompletedCourses.fetchCourses();
 
       setState(() {
-        courses = fetchedCourses;
+        collectioncourses = fetchedCourses;
+        completedcourses = fetchedCompletedCourses;
       });
     } catch (e) {
       throw Exception('Error fetching data: $e');
     }
   }
 
-  // final List<Course> courses = [
-  //   Course(
-  //     name: 'Flutter',
-  //     description: 'Learn how to build beautiful and fast apps with Flutter',
-  //     image: 'flutter.png',
-  //     topics: [
-  //       Topic(
-  //         name: 'Introduction',
-  //         subtopics: [
-  //           Subtopic(
-  //             name: 'What is Flutter?',
-  //             notes:
-  //                 'Flutter is a UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.',
-  //           ),
-  //           Subtopic(
-  //             name: 'Why Flutter?',
-  //             notes:
-  //                 'Flutter offers fast development, expressive and flexible UI, native performance, and a large and growing community.',
-  //           ),
-  //         ],
-  //       ),
-  //       Topic(
-  //         name: 'Widgets',
-  //         subtopics: [
-  //           Subtopic(
-  //             name: 'What are widgets?',
-  //             notes:
-  //                 'Widgets are the basic building blocks of a Flutter app\'s user interface. Each widget is an immutable declaration of part of the user interface.',
-  //           ),
-  //           Subtopic(
-  //             name: 'How to use widgets?',
-  //             notes:
-  //                 'Widgets are organized into a tree of parent and child widgets. The framework builds the widget tree to render the app on the screen.',
-  //           ),
-  //         ],
-  //       ),
-  //     ],
-  //   ),
-  //   Course(
-  //     name: 'Dart',
-  //     description:
-  //         'Learn how to program with Dart, a modern and concise language',
-  //     image: 'dart.png',
-  //     topics: [
-  //       Topic(
-  //         name: 'Basics',
-  //         subtopics: [
-  //           Subtopic(
-  //             name: 'Variables',
-  //             notes:
-  //                 'Variables store references to values. In Dart, variables can be declared using var, final, or const keywords.',
-  //           ),
-  //           Subtopic(
-  //             name: 'Types',
-  //             notes:
-  //                 'Dart is an optionally typed language, which means that you can use types or omit them. Types help to document and catch errors at compile time.',
-  //           ),
-  //         ],
-  //       ),
-  //       Topic(
-  //         name: 'Functions',
-  //         subtopics: [
-  //           Subtopic(
-  //             name: 'What are functions?',
-  //             notes:
-  //                 'Functions are a set of statements that perform a specific task. Functions can have parameters and return values.',
-  //           ),
-  //           Subtopic(
-  //             name: 'How to use functions?',
-  //             notes:
-  //                 'Functions can be invoked by using parentheses and passing arguments. Functions can also be assigned to variables or passed as arguments to other functions.',
-  //           ),
-  //         ],
-  //       ),
-  //     ],
-  //   ),
-  // ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My Learning'),
-      ),
-      body: ListView.builder(
-        itemCount: courses.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: EnrolledCourse(
-                data: courses[index],
-              ),
-            ),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      //  CoursePage(course: courses[index])
-                      NotesView(
-                    courseId: courses[index].courseId,
-                    courseName: courses[index].name,
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
+  Future<void> _refreshData() async {
+    List<Course> fetchedCourses = await getCourses.fetchCourses();
+    List<Course> fetchedCompletedCourses =
+        await getCompletedCourses.fetchCourses();
+    setState(() {
+      collectioncourses = fetchedCourses;
+      completedcourses = fetchedCompletedCourses;
+    });
   }
-}
-
-class CoursePage extends StatelessWidget {
-  final Course course;
-
-  CoursePage({required this.course});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(course.name),
+        backgroundColor: Colors.blue,
+        title: Text(
+          'My Learning',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
+      body: RefreshIndicator(
+          onRefresh: () => _refreshData(),
+          child: CustomScrollView(slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    color: Colors.blue,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: isFirstWidgetVisible ? null : toggleWidgets,
+                          child: Container(
+                            color: Colors.blue,
+                            padding: EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Icon(
+                                    Icons.edit_document,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'Courses in-progress',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: isFirstWidgetVisible ? toggleWidgets : null,
+                          child: Container(
+                            padding: EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Icon(
+                                    Icons.school,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Text(
+                                  'Completed courses',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      if (isFirstWidgetVisible)
+                        Wrap(
+                          runSpacing: 5.1,
+                          children: List.generate(
+                            collectioncourses.length,
+                            (index) => InkWell(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: EnrolledCourse(
+                                  data: collectioncourses[index],
+                                ),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NotesView(
+                                      courseId:
+                                          collectioncourses[index].courseId,
+                                      courseName: collectioncourses[index].name,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      if (!isFirstWidgetVisible)
+                        Wrap(
+                          runSpacing: 5.1,
+                          children: List.generate(
+                            completedcourses.length,
+                            (index) => InkWell(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CompletedCourse(
+                                  data: completedcourses[index],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ]) //customscrollvie
+          ),
     );
   }
 }

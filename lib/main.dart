@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_course/screens/LoginScreen.dart';
-import 'package:online_course/screens/RegistrationScreen.dart';
+
 import 'package:online_course/utils/routing.dart';
-import 'screens/root_app.dart';
 import 'theme/color.dart';
 
 void main() {
@@ -20,8 +19,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: AppRoutes.routes,
-      // home: const RootApp(),
       home: LoginScreen(),
+      // home: RootApp(),
     );
   }
 }

@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:online_course/Controllers/mainAPI.dart';
-import 'package:online_course/Models/Course.dart';
+
+import 'package:online_course/Models/Lesson.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
-class GetFeaturedCourses {
-  Future<List<Course>> fetchCourses() async {
+class GetLessons {
+  Future<List<Lesson>> fetchLessons(int courseId) async {
     String mainUrl = MainApi.url;
-    String fetchUrl = "$mainUrl/featuredcourses/";
+    String fetchUrl = "$mainUrl/lessons/$courseId/";
     try {
       final response = await http.get(
         Uri.parse(fetchUrl),
@@ -18,10 +19,10 @@ class GetFeaturedCourses {
       if (response.statusCode == 200) {
         List<dynamic> jsonList = json.decode(response.body);
 
-        List<Course> courses =
-            jsonList.map((json) => Course.fromJson(json)).toList();
+        List<Lesson> lessons =
+            jsonList.map((json) => Lesson.fromJson(json)).toList();
 
-        return courses;
+        return lessons;
       } else {
         return [];
       }

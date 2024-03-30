@@ -2,50 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:online_course/theme/color.dart';
 import 'package:online_course/widgets/custom_image.dart';
 
-class EnrolledCourse extends StatelessWidget {
-  const EnrolledCourse({
+class CompletedCourse extends StatelessWidget {
+  const CompletedCourse({
     Key? key,
     required this.data,
-    this.onTap,
   }) : super(key: key);
 
   final data;
-  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: EdgeInsets.only(right: 10),
-        padding: EdgeInsets.all(10),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 4,
-              blurRadius: 4,
-              offset: Offset(1, 1),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            CustomImage(
-              data.image,
-              // data["image"],
-              radius: 15,
-              height: 80,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            _buildInfo()
-          ],
-        ),
+    return Container(
+      margin: EdgeInsets.only(right: 10),
+      padding: EdgeInsets.all(10),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 4,
+            blurRadius: 4,
+            offset: Offset(1, 1),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          CustomImage(
+            data.image,
+            // data["image"],
+            radius: 15,
+            height: 80,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          _buildInfo()
+        ],
       ),
     );
   }
@@ -68,7 +63,7 @@ class EnrolledCourse extends StatelessWidget {
           height: 5,
         ),
         Text(
-          'Inprogress',
+          'Completed',
           style:
               TextStyle(fontSize: 14, color: Color.fromARGB(255, 53, 211, 32)),
         ),

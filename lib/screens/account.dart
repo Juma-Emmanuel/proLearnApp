@@ -38,17 +38,20 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: <Widget>[
-        SliverAppBar(
-          backgroundColor: AppColor.appBgColor,
-          pinned: true,
-          snap: true,
-          floating: true,
-          title: _buildHeader(),
-        ),
-        SliverToBoxAdapter(child: _buildBody())
-      ],
+    return RefreshIndicator(
+      onRefresh: () => fetchData(),
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            backgroundColor: AppColor.appBgColor,
+            pinned: true,
+            snap: true,
+            floating: true,
+            title: _buildHeader(),
+          ),
+          SliverToBoxAdapter(child: _buildBody())
+        ],
+      ),
     );
   }
 
@@ -163,7 +166,7 @@ class _AccountPageState extends State<AccountPage> {
             color: AppColor.shadowColor.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 1,
-            offset: Offset(0, 1), // changes position of shadow
+            offset: Offset(0, 1),
           ),
         ],
       ),
