@@ -163,7 +163,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         ),
                       );
                     }
-                  });
+                  }
+                  )
+                  ;
                   ;
                 },
                 style: ElevatedButton.styleFrom(

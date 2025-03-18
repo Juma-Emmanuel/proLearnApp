@@ -36,6 +36,8 @@ class _NotesViewState extends State<NotesView> {
     }
   }
 
+  Future<void> fetchData2() async {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +53,7 @@ class _NotesViewState extends State<NotesView> {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: () => fetchData(),
+        onRefresh: () => fetchData2(),
         child: CustomScrollView(
           slivers: [
             SliverList(
